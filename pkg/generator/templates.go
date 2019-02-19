@@ -1,12 +1,13 @@
 package generator
 
 import (
-	"github.com/32leaves/neke/pkg/parser"
 	"github.com/iancoleman/strcase"
 )
 
-type Generator interface {
-	Render(ast *parser.AST) (string, error)
+var Languages = map[string]*LanguageImpl{
+	"go":         &GoLang,
+	"ts":         &Typescript,
+	"ts-promise": &TypescriptWithPromise,
 }
 
 type LanguageImpl struct {

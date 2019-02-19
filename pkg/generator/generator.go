@@ -10,6 +10,10 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
+type Generator interface {
+	Render(ast *parser.AST, out io.Writer) error
+}
+
 func (l *LanguageImpl) Render(ast *parser.AST, out io.Writer) error {
 	iface, err := l.getTemplate("interface", l.iface)
 	if err != nil {
@@ -23,8 +27,6 @@ func (l *LanguageImpl) Render(ast *parser.AST, out io.Writer) error {
 	if err != nil {
 		return err
 	}
-
-	// TODO: write preamble
 
 	for _, entry := range ast.Entries {
 		if entry.Interface != nil {
