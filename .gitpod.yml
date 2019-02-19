@@ -1,0 +1,3 @@
+tasks:
+- command: go get -v ./... && go build
+checkoutLocation: src/github.com/32leaves/neke

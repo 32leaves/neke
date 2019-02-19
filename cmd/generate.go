@@ -55,7 +55,7 @@ var generateCmd = &cobra.Command{
 		os.Stdout.WriteString(preamble)
 		for _, f := range args {
 			if err := generate(targetLanguage, f); err != nil {
-				fmt.Fprintf(os.Stderr, err.Error())
+				fmt.Fprintln(os.Stderr, err.Error())
 				os.Exit(1)
 			}
 		}

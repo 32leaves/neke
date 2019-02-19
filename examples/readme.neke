@@ -1,0 +1,23 @@
+interface VisitorCountService {
+    func countVisitor (common:CountVisitorRequest) returns (common:CountVisitorResponse)
+    func getVisitorCount (common:GetVisitorCountRequest) returns (common:CountVisitorResponse)
+}
+
+struct CountVisitorRequest {
+    optional name   common:string
+    optional weight go:uint16     ts:number
+    required time   go:string     ts:Date
+    required kind   common:VisitorKind
+}
+
+struct CountVisitorResponse {
+    required count go:uint64 ts:number
+}
+
+struct GetVisitorCountRequest { }
+
+enum VisitorKind {
+    FirstTimeVisitor
+    RepeatedVisitor
+    LongTimeVisitor
+}

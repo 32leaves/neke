@@ -68,7 +68,7 @@ func (l *LanguageImpl) getTemplate(nme, tpl string) (*template.Template, error) 
 func (l *LanguageImpl) getType(ts *parser.Types) (string, error) {
 	t := ts.ByLang(l.name)
 	if t == "" {
-		return "", fmt.Errorf("no type for %s", l.name)
+		return "", fmt.Errorf("no type for target language \"%s\" in %v", l.name, ts.Pos)
 	}
 	return t, nil
 }
