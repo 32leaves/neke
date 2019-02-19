@@ -1,0 +1,18 @@
+
+interface HelloWorld {
+    func SayHello (common:SayHelloRequest) returns (common:SayHelloResponse)
+}
+
+struct SayHelloRequest {
+    required name   common:string
+    optional repeat go:number ts:int32
+}
+
+struct SayHelloRequest {
+    required success common:Success
+}
+
+enum Success {
+    yes
+    no
+}
