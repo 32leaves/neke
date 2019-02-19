@@ -3,12 +3,6 @@
 package parser
 
 import (
-	"fmt"
-	"os"
-
-	"github.com/alecthomas/kong"
-	"github.com/alecthomas/repr"
-
 	"github.com/alecthomas/participle"
 	"github.com/alecthomas/participle/lexer"
 )
@@ -96,7 +90,7 @@ type Type struct {
 	Pos lexer.Position
 
 	Lang string `@Ident ":"`
-	Name string `@Ident`
+	Name string `(@Ident (@"." @Ident)*)`
 }
 
 func NewParser() *participle.Parser {
@@ -104,27 +98,4 @@ func NewParser() *participle.Parser {
 		&AST{},
 		participle.UseLookahead(1),
 	)
-}
-
-var (
-	cli struct {
-		Files []string `required existingfile arg help:"Protobuf files."`
-	}
-)
-
-func main() {
-	ctx := kong.Parse(&cli)
-
-	for _, file := range cli.Files {
-		fmt.Println(file)
-
-		r, err := os.Open(file)
-		ctx.FatalIfErrorf(err, "")
-
-		ast := &AST{}
-		err = NewParser().Parse(r, ast)
-		ctx.FatalIfErrorf(err, "")
-
-		repr.Println(ast, repr.Hide(&lexer.Position{}))
-	}
 }

@@ -12,8 +12,8 @@ func TestBasicStruct(t *testing.T) {
 	code := `
 struct Foobar {
     required firstField     common:string
-    required anotherField  go:int32 ts:number
-    optional optionalField go:bool  ts:boolean
+    required anotherField  go:int32      ts:number
+    optional optionalField go:time.Time  ts:Date
 }
 `
 	r := &AST{}
@@ -68,8 +68,8 @@ struct Foobar {
 			Optional: true,
 			Types: &Types{
 				Children: []*Type{
-					{Lang: "go", Name: "bool"},
-					{Lang: "ts", Name: "boolean"},
+					{Lang: "go", Name: "time.Time"},
+					{Lang: "ts", Name: "Date"},
 				},
 			},
 		},
